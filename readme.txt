@@ -1,6 +1,6 @@
 === WP Featured Image Widget ===
 Contributors: Nanhe Kumar
-Tags: featured image, post thumbnail, widget, wordpress widget, siderbar
+Tags: featured image, post thumbnail, widget, wordpress widget, siderbar, carousel
 Requires at least: 3.5
 Tested up to: 4.7
 Stable tag: 0.1
