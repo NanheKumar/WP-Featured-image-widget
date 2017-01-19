@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Featured image widget
  * Plugin URI: http://wordpress.org/extend/plugins/wp-featured-image-widget/
- * Description: This widget shows the featured image for posts and pages.
+ * Description: This widget shows the featured image for posts and pages with jquery slider.
  * Version: 0.1
  * Author: Nanhe Kumar
  * Author URI: http://www.nanhe.in/
@@ -134,10 +134,11 @@ class WPFeaturedImageWidget extends WP_Widget {
 		}
 		
 		while ( have_posts() ) : the_post();
-			if ( $slider ) {
-				echo '<li>';
-			}
+
 			if ( has_post_thumbnail() ) {
+				if ( $slider ) {
+					echo '<li>';
+				}
 				if ( $link ) {
 		 ?>
 					<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
@@ -147,7 +148,13 @@ class WPFeaturedImageWidget extends WP_Widget {
 				} else { 
 					the_post_thumbnail( $size );
 				}
+				if ( $slider ) {
+					echo '</li>';
+				}
 			} else if ( $parent && has_post_thumbnail( wp_get_post_parent_id( get_the_ID() ) ) ) {
+				if ( $slider ) {
+					echo '<li>';
+				}
 				if ( $link ) { 
 		?>
 					<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
@@ -157,18 +164,17 @@ class WPFeaturedImageWidget extends WP_Widget {
 				} else { 
 					echo get_the_post_thumbnail(wp_get_post_parent_id( get_the_ID() ), $size);
 				}
+				if ( $slider ) {
+					echo '</li>';
+				}
 			}
-			if ( $slider ) {
-				echo '</li>';
-			}
+
 		endwhile;
 		echo '</ul>';
 		echo '</div>';
 		echo $after_widget;
 		if ( $slider ) {
-		?>
-
-	
+		?>	
 		<script>
 			jQuery(document).ready(function($) {
 				$('.wp-featured-image-widget').unslider({
